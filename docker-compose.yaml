@@ -1,0 +1,45 @@
+version: '3.2'
+
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - "8083:80"
+    working_dir: /app
+    depends_on:
+      - php
+    volumes:
+      - .:/app
+      - ./docker/nginx/site.conf:/etc/nginx/conf.d/default.conf
+
+  php:
+    build: ./docker/php
+    depends_on:
+      - mysql
+    # Comment out these volumes in production
+    volumes:
+      - .:/app:rw
+
+  mysql:
+    image: mysql:5.7
+    volumes:
+      - mysql-data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: symfony-5-learning
+      MYSQL_USER: rilwan
+      MYSQL_PASSWORD: rilwan
+    ports:
+      - "3313:3306"
+
+  adminer:
+    image: adminer
+    depends_on:
+      - mysql
+    restart: always
+    ports:
+      - 2003:8080
+
+volumes:
+  mysql-data: {}
