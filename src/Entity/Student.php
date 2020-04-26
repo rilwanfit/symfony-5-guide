@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DoctrineStudentRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Student
 {
@@ -27,6 +29,11 @@ class Student
      * @ORM\Column(type="string")
      */
     private $surname;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updatedAt;
 
     public function getId()
     {
@@ -58,4 +65,18 @@ class Student
         $this->surname = $surname;
     }
 
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @ORM\PreUpdate()
+     */
+    public function setUpdatedAt(): self
+    {
+        $this->updatedAt = new DateTimeImmutable();
+
+        return $this;
+    }
 }
