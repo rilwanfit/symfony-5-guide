@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Entity\Student;
 use App\Repository\StudentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class StudentController extends AbstractController
@@ -36,5 +38,20 @@ class StudentController extends AbstractController
         return $this->render('student/show.html.twig', [
             'student' => $student
         ]);
+    }
+
+    /**
+     * @Route("/student/create/{firstName}/{surname}")
+     */
+    public function create($firstName, $surname)
+    {
+        $student = new Student();
+        $student->setFirstName($firstName);
+        $student->setSurname($surname);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($student);
+        $em->flush();
+
+        return new Response('Created new student with id '.$student->getId());
     }
 }
