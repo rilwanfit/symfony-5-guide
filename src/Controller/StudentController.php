@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\Entity\Student;
 use App\Repository\StudentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -25,12 +26,12 @@ class StudentController extends AbstractController
     }
 
     /**
-     * @Route("/student/{id}", name="app_student_show")
+     * @Route("/student/{id<\d+>}", name="app_student_show")
      */
     public function show(Student $student)
     {
         if (!$student) {
-            throw $this->createNotFoundException( 'No product found for id '.$id );
+            throw $this->createNotFoundException( 'No product found for id '.$student->getId() );
         }
 
         return $this->render('student/show.html.twig', [
@@ -39,9 +40,24 @@ class StudentController extends AbstractController
     }
 
     /**
-     * @Route("/student/create/{firstName}/{surname}")
+     * @Route("/student/new", name="app_student_new")
      */
-    public function create($firstName, $surname)
+    public function new(Request $request)
+    {
+        if($request->isMethod('POST')) {
+            $firstName = $request->request->get('firstName');
+            $surname = $request->request->get('surname');
+            if (empty($firstName) || empty($surname)) {
+                $this->addFlash('error','student firstName/surname cannot be an empty string');
+            } else {
+                return $this->create($firstName, $surname);
+            }
+        }
+
+        return $this->render('student/new.html.twig');
+    }
+
+    private function create($firstName, $surname)
     {
         $student = new Student();
         $student->setFirstName($firstName);
