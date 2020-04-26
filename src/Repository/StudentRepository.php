@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
-use App\Entity\Student;
-
 interface StudentRepository
 {
-    public function findAll(): array;
+    public function findAll();
 
-    public function find($id): ?Student;
+    public function find($id);
 }
