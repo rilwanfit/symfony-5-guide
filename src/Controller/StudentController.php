@@ -27,10 +27,8 @@ class StudentController extends AbstractController
     /**
      * @Route("/student/{id}", name="app_student_show")
      */
-    public function show($id, StudentRepository $studentRepository)
+    public function show(Student $student)
     {
-        $student = $studentRepository->find($id);
-
         if (!$student) {
             throw $this->createNotFoundException( 'No product found for id '.$id );
         }
@@ -59,9 +57,10 @@ class StudentController extends AbstractController
     /**
      * @Route("/student/delete/{id}")
      */
-    public function delete($id, StudentRepository $studentRepository)
+    public function delete(Student $student)
     {
-        $student = $studentRepository->find($id);
+        // store ID before deleting, so can report ID later
+        $id = $student->getId();
 
         $em = $this->getDoctrine()->getManager();
         $em->remove($student);
@@ -73,11 +72,10 @@ class StudentController extends AbstractController
     /**
      * @Route("/student/update/{id}/{newFirstName}/{newSurname}")
      */
-    public function update($id, $newFirstName, $newSurname, StudentRepository $studentRepository)
+    public function update(Student $student, $newFirstName, $newSurname, StudentRepository $studentRepository)
     {
-        $student = $studentRepository->find($id);
         if (!$student) {
-            throw $this->createNotFoundException( 'No product found for id '.$id );
+            throw $this->createNotFoundException( 'No product found for id '.$student->getId() );
         }
 
         $student->setFirstName($newFirstName);
