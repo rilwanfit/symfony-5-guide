@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class StudentController extends AbstractController
 {
     /**
-     * @Route("/student")
+     * @Route("/student", name="app_student_homepage")
      */
     public function index(StudentRepository $studentRepository)
     {
@@ -68,5 +68,24 @@ class StudentController extends AbstractController
         $em->flush();
 
         return new Response('Deleted student with id '.$id);
+    }
+
+    /**
+     * @Route("/student/update/{id}/{newFirstName}/{newSurname}")
+     */
+    public function update($id, $newFirstName, $newSurname, StudentRepository $studentRepository)
+    {
+        $student = $studentRepository->find($id);
+        if (!$student) {
+            throw $this->createNotFoundException( 'No product found for id '.$id );
+        }
+
+        $student->setFirstName($newFirstName);
+        $student->setSurname($newSurname);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
+
+        return $this->redirectToRoute('app_student_homepage');
     }
 }
