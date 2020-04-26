@@ -48,10 +48,25 @@ class StudentController extends AbstractController
         $student = new Student();
         $student->setFirstName($firstName);
         $student->setSurname($surname);
+
         $em = $this->getDoctrine()->getManager();
         $em->persist($student);
         $em->flush();
 
         return new Response('Created new student with id '.$student->getId());
+    }
+
+    /**
+     * @Route("/student/delete/{id}")
+     */
+    public function delete($id, StudentRepository $studentRepository)
+    {
+        $student = $studentRepository->find($id);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($student);
+        $em->flush();
+
+        return new Response('Deleted student with id '.$id);
     }
 }
