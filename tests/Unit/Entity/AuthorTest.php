@@ -27,6 +27,24 @@ class AuthorTest extends TestCase
         $this->assertCount($expectedErrorCount, $errors);
     }
 
+    /**
+     * @dataProvider genreOfAuthor()
+     */
+    public function testGenreOfTheAuthorCanOnlyBeAllowedType($genre, $expectedErrorCount)
+    {
+        $author = new Author();
+        $author->name = 'MH Rilwan';
+
+        $author->setGenre($genre);
+
+        $validator = Validation::createValidatorBuilder()
+            ->enableAnnotationMapping()
+            ->getValidator();
+
+        $errors = $validator->validate($author);
+        $this->assertCount($expectedErrorCount, $errors);
+    }
+
     public function nameOfAuthor()
     {
         return [
@@ -56,6 +74,28 @@ class AuthorTest extends TestCase
             ],
             [
                 'name' => true,
+                'expectedErrorCount' => 0
+            ],
+        ];
+    }
+
+    public function genreOfAuthor()
+    {
+        return [
+            [
+                'genre' => '',
+                'expectedErrorCount' => 1
+            ],
+            [
+                'genre' => 'not-allowed-type',
+                'expectedErrorCount' => 1
+            ],
+            [
+                'genre' => 'fiction',
+                'expectedErrorCount' => 0
+            ],
+            [
+                'genre' => 'non-fiction',
                 'expectedErrorCount' => 0
             ],
         ];
