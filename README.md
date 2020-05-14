@@ -47,8 +47,18 @@ The purpose of the Expression constraint is to allows you to use an [https://sym
 
 Imagine you have a class `BlogPost` with `category` and `isTechnicalPost` properties
 
-#### Let's validate an BlogPost object where it meets the following conditions
+#### Let's validate a BlogPost object where it meets the following conditions
    - If isTechnicalPost is `true`, then category must be either `php or symfony`
    - If isTechnicalPost is `false`, then category can be `anything`.
 
    code: https://github.com/rilwanfit/symfony-5-learning/commit/112b9ca57b68e8e0351ed08dab7beb5718a4a0fe
+   
+### 6. Validation Groups
+
+By default, when validating an object all constraints of this class will be checked.
+
+validation groups will help you to take control over it and then we can apply validation against just one group of constraints.
+
+#### Let's validate a User object where it meets the following conditions.
+    - When a user registers we need to check for email and password fields
+    - When a user later updates his contact information then we need to check for city field
