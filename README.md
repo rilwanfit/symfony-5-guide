@@ -64,3 +64,9 @@ validation groups will help you to take control over it and then we can apply va
     - When a user later updates his contact information then we need to check for city field
 
 code: https://github.com/rilwanfit/symfony-5-learning/commit/1a266237c26d989ce31a51893a7d5c0b656fbefd
+
+### 7. Sequentially Apply Validation Groups
+
+For example, suppose you have a User class and want to validate that the username and the password are different only if all other validation passes (in order to avoid multiple error messages).
+
+

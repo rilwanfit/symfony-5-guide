@@ -81,6 +81,47 @@ class AuthorTest extends TestCase
         $this->assertCount(0, $errors);
     }
 
+    public function testDoNotValidateIsPasswordSafeWhenNameAndGenreIsWrong()
+    {
+        $author = new Author();
+        $author->name = '';
+
+        $validator = Validation::createValidatorBuilder()
+            ->enableAnnotationMapping()
+            ->getValidator();
+
+        $errors = $validator->validate($author);
+        $this->assertContains('This value should not be blank.', $errors->__toString());
+    }
+
+    public function testValidateIsPasswordSafeWhenNameAndGenreIsRight()
+    {
+        $author = new Author();
+        $author->name = 'rilwan';
+        $author->setPassword('rilwan123');
+        $author->setGenre('fiction');
+
+        $validator = Validation::createValidatorBuilder()
+            ->enableAnnotationMapping()
+            ->getValidator();
+
+        $errors = $validator->validate($author);
+        $this->assertContains('The password cannot contains your name', $errors->__toString());
+    }
+
+    public function testValidateIsPasswordSafeEvenWhenNameAndGenreIsWrongOnlyGroupSpecified()
+    {
+        $author = new Author();
+        $author->name = '';
+
+        $validator = Validation::createValidatorBuilder()
+            ->enableAnnotationMapping()
+            ->getValidator();
+
+        $errors = $validator->validate($author, null, ['Strict']);
+        $this->assertContains('The password cannot contains your name', $errors->__toString());
+    }
+
     public function nameOfAuthor()
     {
         return [

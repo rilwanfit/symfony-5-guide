@@ -7,6 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
+ * @Assert\GroupSequence({"Author", "Strict"})
  * @ORM\Entity(repositoryClass="App\Repository\AuthorRepository")
  */
 class Author
@@ -67,7 +68,7 @@ class Author
     }
 
     /**
-     * @Assert\IsTrue(message="The password cannot contains your name")
+     * @Assert\IsTrue(message="The password cannot contains your name", groups={"Strict"})
      */
     public function isPasswordSafe()
     {
