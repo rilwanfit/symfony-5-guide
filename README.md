@@ -50,3 +50,5 @@ Imagine you have a class `BlogPost` with `category` and `isTechnicalPost` proper
 #### Let's validate an BlogPost object where it meets the following conditions
    - If isTechnicalPost is `true`, then category must be either `php or symfony`
    - If isTechnicalPost is `false`, then category can be `anything`.
+
+   code: https://github.com/rilwanfit/symfony-5-learning/commit/112b9ca57b68e8e0351ed08dab7beb5718a4a0fe
