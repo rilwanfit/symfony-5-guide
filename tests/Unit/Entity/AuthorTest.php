@@ -63,6 +63,24 @@ class AuthorTest extends TestCase
         $this->assertCount($expectedErrorCount, $errors);
     }
 
+    public function testFakeNameOfTheAuthor()
+    {
+        $author = new Author();
+        $author->name = 'fakename';
+
+        $validator = Validation::createValidatorBuilder()
+            ->enableAnnotationMapping()
+            ->getValidator();
+
+        $errors = $validator->validate($author);
+        $this->assertCount(1, $errors);
+
+
+        $author->name = 'goodname';
+        $errors = $validator->validate($author);
+        $this->assertCount(0, $errors);
+    }
+
     public function nameOfAuthor()
     {
         return [

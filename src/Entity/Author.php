@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AuthorRepository")
@@ -75,5 +76,22 @@ class Author
         }
 
         return strpos($this->password, (string) $this->name) === false;
+    }
+
+    /**
+     * @Assert\Callback
+     */
+    public function isAuthorValid(ExecutionContextInterface $context, $payload): void
+    {
+        $fakeNames = [
+            'fakename'
+        ];
+
+        // check if the name is actually a fake name
+        if (in_array($this->name, $fakeNames)) {
+            $context->buildViolation('This name sounds totally fake!')
+                ->atPath('firstName')
+                ->addViolation();
+        }
     }
 }

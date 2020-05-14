@@ -25,3 +25,18 @@ you can add a constraint to any public method whose name starts with "get", "is"
 Let's validate an author object where you want to make sure that a password field doesn't match the first name of the user.
 
 code: https://github.com/rilwanfit/symfony-5-learning/commit/f495f8d2c6ffa21e51134be5c0b6234321cf9937
+
+#### an entire class.
+
+Some constraints apply to the entire class being validated. i.e: Expression, Callback, UniqueEntity, Traverse
+
+4. Callback - can be used in all the targets.
+The Callback constraint is a great way to define custom validation rules without the need to create custom constraints and validator classes.
+
+The purpose of the Callback constraint is to create completely custom validation rules and to assign any validation errors to specific fields on your object.
+
+ You just need to create one or more methods that does the validation and generates some violations.
+ 
+ Let's validate an author object where the name is actually a fake name or not, if it is fake, attach the error to `name` field
+ 
+ 
