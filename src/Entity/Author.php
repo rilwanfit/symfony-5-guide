@@ -31,6 +31,11 @@ class Author
      */
     private $genre;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $password;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -46,5 +51,29 @@ class Author
         $this->genre = $genre;
 
         return $this;
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * @Assert\IsTrue(message="The password cannot contains your name")
+     */
+    public function isPasswordSafe()
+    {
+        if (empty($this->name)) {
+            return false;
+        }
+
+        return strpos($this->password, (string) $this->name) === false;
     }
 }

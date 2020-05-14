@@ -20,11 +20,11 @@ class AuthorTest extends TestCase
             ->getValidator();
 
         $errors = $validator->validate($author);
-        $this->assertCount(1, $errors);
+        $this->assertGreaterThanOrEqual(1, count($errors));
 
         $author->name = $name;
         $errors = $validator->validate($author);
-        $this->assertCount($expectedErrorCount, $errors);
+        $this->assertGreaterThanOrEqual($expectedErrorCount, count($errors));
     }
 
     /**
@@ -36,6 +36,24 @@ class AuthorTest extends TestCase
         $author->name = 'MH Rilwan';
 
         $author->setGenre($genre);
+
+        $validator = Validation::createValidatorBuilder()
+            ->enableAnnotationMapping()
+            ->getValidator();
+
+        $errors = $validator->validate($author);
+        $this->assertCount($expectedErrorCount, $errors);
+    }
+
+    /**
+     * @dataProvider usenameAndPasswordOfAuthor()
+     */
+    public function testPasswordDoesNotContainsTheNameOfTheAuthor($user, $expectedErrorCount)
+    {
+        $author = new Author();
+        $author->name = $user['name'];
+
+        $author->setPassword($user['password']);
 
         $validator = Validation::createValidatorBuilder()
             ->enableAnnotationMapping()
@@ -96,6 +114,40 @@ class AuthorTest extends TestCase
             ],
             [
                 'genre' => 'non-fiction',
+                'expectedErrorCount' => 0
+            ],
+        ];
+    }
+
+    public function usenameAndPasswordOfAuthor()
+    {
+        return [
+            [
+                'user' => [
+                    'name' => 'rilwan',
+                    'password' => 'rilwan123'
+                ],
+                'expectedErrorCount' => 1
+            ],
+            [
+                'user' => [
+                    'name' => 'rilwan',
+                    'password' => '123rilwan'
+                ],
+                'expectedErrorCount' => 1
+            ],
+            [
+                'user' => [
+                    'name' => 'rilwan',
+                    'password' => '12rilwan3'
+                ],
+                'expectedErrorCount' => 1
+            ],
+            [
+                'user' => [
+                    'name' => 'rilwan',
+                    'password' => '123456'
+                ],
                 'expectedErrorCount' => 0
             ],
         ];
