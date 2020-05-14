@@ -71,3 +71,9 @@ For example, suppose you have a User class and want to validate that the usernam
 
 code: https://github.com/rilwanfit/symfony-5-learning/commit/3075ca4fea7566bb7a2e56842be3410759f78a48
 
+### 8. Group Sequence Providers
+
+Scenario: an client object can be a person or a company. 
+ - if it is a person then we need to validate only first and last name.
+ - if it is a company then we need to validate only company name.
+
