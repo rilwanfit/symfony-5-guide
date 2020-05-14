@@ -31,8 +31,7 @@ code: https://github.com/rilwanfit/symfony-5-learning/commit/f495f8d2c6ffa21e511
 
 Some constraints apply to the entire class being validated. i.e: Expression, Callback, UniqueEntity, Traverse
 
-### 4. Callback - can be used in all the targets.
-The Callback constraint is a great way to define custom validation rules without the need to create custom constraints and validator classes.
+### 4. Callback - can be used in all three targets.
 
 The purpose of the Callback constraint is to create completely custom validation rules and to assign any validation errors to specific fields on your object.
 
@@ -41,3 +40,13 @@ The purpose of the Callback constraint is to create completely custom validation
 #### Let's validate an author object where the name is actually a fake name or not, if it is fake, attach the error to `name` field
  
  code: https://github.com/rilwanfit/symfony-5-learning/commit/8ae9428a501445e67c286660cd4d50bcd4990e46 
+ 
+### 5. Expression - can be used in all three targets.
+
+The purpose of the Expression constraint is to allows you to use an [https://symfony.com/doc/current/components/expression_language.html#component-expression-language-examples](expression) for more complex, dynamic validation
+
+Imagine you have a class `BlogPost` with `category` and `isTechnicalPost` properties
+
+#### Let's validate an BlogPost object where it meets the following conditions
+   - If isTechnicalPost is `true`, then category must be either `php or symfony`
+   - If isTechnicalPost is `false`, then category can be `anything`.
