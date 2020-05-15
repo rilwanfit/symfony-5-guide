@@ -78,3 +78,7 @@ Scenario: an client object can be a person or a company.
  - if it is a company then we need to validate only company name.
 
 code: https://github.com/rilwanfit/symfony-5-learning/commit/5ac33f44d47d48a9c522d0038b2c3f7e90612feb
+
+### 9. 
+Scenario: Events calendar, When you add a new event validate that there is no other event in the same time frame to avoid conflicting times. 
+
