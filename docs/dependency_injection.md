@@ -93,3 +93,15 @@ Services can be created and configured via invokable factories by omitting the m
 Factory class need to be registered as a service too.
 
 code: https://github.com/rilwanfit/symfony-5-learning/commit/f0208f984d0faa255302a4ebf68ee70d0c4f1d5b
+
+#### Passing Arguments to the Factory Method
+
+> Arguments to your factory method are autowired if that's enabled for your service. or else you have to pass the arguments explicit as below
+
+```yaml
+App\Email\NewsletterManager:
+    factory:   ['@App\Email\NewsletterManagerFactory', createNewsletterManager]
+    arguments: ['@templating']
+```
+
+

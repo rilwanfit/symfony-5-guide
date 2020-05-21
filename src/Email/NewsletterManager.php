@@ -4,9 +4,15 @@ declare(strict_types=1);
 
 namespace App\Email;
 
+use Twig\Environment;
+
 class NewsletterManager
 {
-    public function __construct()
+    /** @var Environment */
+    private $twig;
+
+    public function __construct(Environment $twig)
     {
+        $this->twig = $twig;
     }
 }

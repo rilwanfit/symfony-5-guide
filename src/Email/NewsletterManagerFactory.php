@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace App\Email;
 
+use Twig\Environment;
+
 class NewsletterManagerFactory
 {
-    public function createNewsletterManager()
+    public function createNewsletterManager(Environment $twig)
     {
-        return new NewsletterManager();
+        return new NewsletterManager($twig);
     }
 }
