@@ -44,4 +44,29 @@ This can be done via the usage of `parent` and `abstract` keys
 
 code: https://github.com/rilwanfit/symfony-5-learning/commit/efc8bf0915e818b7bcfd262a774f18bc62601b16
 
+#### How to Modify parent dependencies
+
+##### Make the child service as public
+```yaml
+App\Repository\DoctrineUserRepository:
+    parent: App\Repository\BaseDoctrineRepository
+    public: true
+```
+
+##### Append a new argument to the list.
+```yaml
+App\Repository\DoctrineUserRepository:
+    parent: App\Repository\BaseDoctrineRepository
+    arguments: ['@filesystem']
+```
+
+DoctrineUserRepository will be having two arguments as Service(doctrine.orm.default_entity_manager) and Service(filesystem) where doctrine.orm.default_entity_manager is inherited from the parent.
+
+##### Override the parent argument.
+```yaml
+App\Repository\DoctrineUserRepository:
+    parent: App\Repository\BaseDoctrineRepository
+    arguments:
+        index_0: '@doctrine.custom_entity_manager'
+```
 
