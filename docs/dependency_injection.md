@@ -78,5 +78,5 @@ static method in a factory need to be called to create an object. the service re
 
 > static factory class does not need to registered as a service.
 
-code: https://github.com/rilwanfit/symfony-5-learning/commit/610fde770deb6b24d9b0df97ac1cde4bc7f4dad3
+code: https://github.com/rilwanfit/symfony-5-learning/commit/afc4ba0435fec938ca603635da6102d6c0883352
 
