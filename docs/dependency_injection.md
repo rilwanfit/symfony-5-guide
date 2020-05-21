@@ -2,6 +2,8 @@
 
 The container is basically an associative array which holds service objects.
 
+symfony service container create a service only when you ask for it and if you ask for it in many places it will serve you the same instance by default.
+
 ```php
 $obj = $container->get('name');
 ```
@@ -106,3 +108,8 @@ App\Email\NewsletterManager:
 
 code: https://github.com/rilwanfit/symfony-5-learning/commit/e12149c644463eef0026797c3dd11ffee1c12fb5
 
+### Manually Wiring Arguments
+
+There are a few cases when an argument to a service cannot be autowired.
+
+> the argument name must match with parameter name in the construct.

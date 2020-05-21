@@ -54,3 +54,8 @@ services:
 # Uncomment following lines of code to use invokable factory
 #    App\Email\NewsletterManager:
 #        factory: '@App\Email\InvokableNewsletterManagerFactory'
+
+    # explicitly configure the service
+    App\Update\SiteUpdateManager:
+        arguments:
+            $adminEmail: 'manager@example.com'
