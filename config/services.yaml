@@ -50,3 +50,7 @@ services:
 
 #    App\Email\NewsletterManager:
 #        factory: ['@App\Email\NewsletterManagerFactory', 'createNewsletterManager']
+
+# Uncomment following lines of code to use invokable factory
+#    App\Email\NewsletterManager:
+#        factory: '@App\Email\InvokableNewsletterManagerFactory'
