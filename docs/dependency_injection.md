@@ -83,3 +83,5 @@ code: https://github.com/rilwanfit/symfony-5-learning/commit/afc4ba0435fec938ca6
 ### Non-Static Factories
 
 Factory class need to be registered as a service too.
+
+code: https://github.com/rilwanfit/symfony-5-learning/commit/f47d8c22ab93581dc866070cf194e5c56d5d2eaa
