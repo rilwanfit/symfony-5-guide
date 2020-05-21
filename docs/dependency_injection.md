@@ -104,4 +104,5 @@ App\Email\NewsletterManager:
     arguments: ['@templating']
 ```
 
+code: https://github.com/rilwanfit/symfony-5-learning/commit/e12149c644463eef0026797c3dd11ffee1c12fb5
 
