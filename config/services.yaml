@@ -45,3 +45,8 @@ services:
 
     App\Email\NewsletterManager:
         factory: ['App\Email\NewsletterManagerStaticFactory', 'createNewsletterManager']
+
+    App\Email\NewsletterManagerFactory: ~
+
+#    App\Email\NewsletterManager:
+#        factory: ['@App\Email\NewsletterManagerFactory', 'createNewsletterManager']

@@ -80,3 +80,6 @@ static method in a factory need to be called to create an object. the service re
 
 code: https://github.com/rilwanfit/symfony-5-learning/commit/afc4ba0435fec938ca603635da6102d6c0883352
 
+### Non-Static Factories
+
+Factory class need to be registered as a service too.
