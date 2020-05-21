@@ -91,3 +91,5 @@ code: https://github.com/rilwanfit/symfony-5-learning/commit/f47d8c22ab93581dc86
 Services can be created and configured via invokable factories by omitting the method name
 
 Factory class need to be registered as a service too.
+
+code: https://github.com/rilwanfit/symfony-5-learning/commit/f0208f984d0faa255302a4ebf68ee70d0c4f1d5b
