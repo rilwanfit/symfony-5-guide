@@ -42,3 +42,6 @@ services:
         parent: App\Repository\BaseDoctrineRepository
         autowire: true
         autoconfigure: false
+
+    App\Email\NewsletterManager:
+        factory: ['App\Email\NewsletterManagerStaticFactory', 'createNewsletterManager']

@@ -70,3 +70,13 @@ App\Repository\DoctrineUserRepository:
         index_0: '@doctrine.custom_entity_manager'
 ```
 
+### Using a Factory to Create Services
+
+#### Static Factories
+
+static method in a factory need to be called to create an object. the service registration of this object need to use `factory` option.
+
+> static factory class does not need to registered as a service.
+
+code: https://github.com/rilwanfit/symfony-5-learning/commit/610fde770deb6b24d9b0df97ac1cde4bc7f4dad3
+
