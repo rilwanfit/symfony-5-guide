@@ -115,3 +115,14 @@ There are a few cases when an argument to a service cannot be autowired.
 > the argument name must match with parameter name in the construct.
 
 code: https://github.com/rilwanfit/symfony-5-learning/commit/541615c4aa30ea22088fd2ac0bd26d777cfc9207
+
+### Repository with Doctrine as Service
+
+Approach > composition over inheritance
+
+Advantage: 
+1. Everything is strictly typehinted, no more frustration from missing autocompletion.
+2. Constructor injection works like you expect it to.
+3. You can get another dependency if you like.
+
+https://www.tomasvotruba.com/blog/2017/10/16/how-to-use-repository-with-doctrine-as-service-in-symfony/
